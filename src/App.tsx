@@ -169,7 +169,7 @@ export default function Editor() {
     ) => {
       console.log('values', values)
 
-      // form.restart(newValues); replace new values form backend 
+      window.parent.postMessage(JSON.stringify(values), "*");
       message.success('Saved success!')
     },
     []
