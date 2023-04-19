@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-wrap-multilines */
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { Button, message, PageHeader } from 'antd';
 import mjml from 'mjml-browser';
 
@@ -113,6 +113,7 @@ const pageBlock = BlockManager.getBlockByType(BasicType.PAGE)!;
 
 export default function Editor() {
   const [downloadFileName, setDownloadName] = useState('download.mjml');
+  
   // const [template, setTemplate] = useState<IEmailTemplate['content']>(pageBlock.create({
   //   data: {
   //     value: {
@@ -127,7 +128,15 @@ export default function Editor() {
   const { width } = useWindowSize();
 
   const smallScene = width < 1400;
+  useEffect(() => {
+    window.parent.addEventListener("message", handleMessage, false);
 
+    function handleMessage(e) {
+      var data = JSON.parse(e.data);
+      setTemplate(data);
+      alert(JSON.stringify(data));
+    }
+  }, [template]);
   const onCopyHtml = (values: IEmailTemplate) => {
     const html = mjml(JsonToMjml({
       data: values.content,
