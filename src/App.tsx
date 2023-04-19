@@ -129,14 +129,16 @@ export default function Editor() {
 
   const smallScene = width < 1400;
   useEffect(() => {
-    window.parent.addEventListener("message", handleMessage, false);
-
-    function handleMessage(e) {
+    window.addEventListener("message", handleMessage, false);
+    function handleMessage(e: any) {
       var data = JSON.parse(e.data);
       setTemplate(data);
-      alert(JSON.stringify(data));
+      alert(JSON.stringify(e.data));
+      if(data){
+        window.removeEventListener("message", handleMessage, false);
+      }
     }
-  }, [template]);
+  }, []);
   const onCopyHtml = (values: IEmailTemplate) => {
     const html = mjml(JsonToMjml({
       data: values.content,
