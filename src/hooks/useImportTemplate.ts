@@ -11,7 +11,6 @@ const uploader = new Uploader(async () => (''), {
 
 
 export function useImportTemplate() {
-
   const importTemplate = async () => {
     const [file] = await uploader.chooseFile();
     const reader = new FileReader();

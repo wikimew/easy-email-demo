@@ -21,7 +21,7 @@ import { ExtensionProps, SimpleLayout, StandardLayout } from 'easy-email-extensi
 import { FormApi } from 'final-form';
 import 'easy-email-editor/lib/style.css';
 import 'easy-email-extensions/lib/style.css';
-import '@arco-themes/react-easy-email-theme-purple/css/arco.css';
+import '@arco-themes/react-easy-email-theme/css/arco.css';
 import {useWindowSize} from 'react-use'
 
 import './CustomBlocks';
@@ -35,14 +35,6 @@ const fontList = [
   'Georgia',
   'Lato',
   'Montserrat',
-  '黑体',
-  '仿宋',
-  '楷体',
-  '标楷体',
-  '华文仿宋',
-  '华文楷体',
-  '宋体',
-  '微软雅黑',
 ].map(item => ({ value: item, label: item }));
 
 const categories: ExtensionProps['categories'] = [
@@ -133,7 +125,7 @@ export default function Editor() {
     function handleMessage(e: any) {
       var data = JSON.parse(e.data);
       setTemplate(data);
-      alert(JSON.stringify(e.data));
+      // alert(JSON.stringify(e.data));
       if(data){
         window.removeEventListener("message", handleMessage, false);
       }
@@ -214,7 +206,7 @@ export default function Editor() {
           return (
             <>
               <PageHeader
-                title='Edit'
+                title='Email Editor'
                 extra={
                   <Stack alignment="center">
                     <Button onClick={() => onCopyHtml(values)}>
